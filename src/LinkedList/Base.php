@@ -30,8 +30,6 @@ abstract class Base implements Iterator
     
     abstract public function display();
 
-    abstract public function displayBackward();
-
     abstract public function search(string $query=null);
 
     public function current()

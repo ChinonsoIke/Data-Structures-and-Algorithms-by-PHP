@@ -5,9 +5,8 @@ use Src\LinkedList\ItemListLinear;
 use Src\LinkedList\ItemListCircular;
 use Src\LinkedList\ItemListDouble;
 
+echo "\n-------------------LINEAR LINKED LIST-------------------\n";
 $books= new ItemListLinear();
-$otherBooks= new ItemListCircular();
-$booksAgain= new ItemListDouble();
 
 $books->insert('Percy Jackson: Lightening Thief');
 $books->insert('Angels and Demons');
@@ -23,7 +22,7 @@ $books->delete('Angels and Demons');
 
 $books->getNthNode(2);
 
-$books->displayBackward();
+$books->reverse();
 
 $books->display();
 
@@ -37,11 +36,9 @@ for($books->rewind(); $books->valid(); $books->next()){
 
 $books->search('Angels and Demons');
 
-$otherBooks->insert('Think and Grow Rich');
-$otherBooks->insert('Rich Dad, Poor Dad');
 
-$otherBooks->display();
-
+echo "\n-------------------DOUBLY LINKED LIST-------------------\n";
+$booksAgain= new ItemListDouble();
 $booksAgain->insertAtFirst('PHP 7 DSAs');
 $booksAgain->insert('Computer Science Distilled');
 $booksAgain->insert('Laravel Up and Running');
@@ -54,6 +51,7 @@ $booksAgain->delete('Computer Science Distilled');
 
 $booksAgain->displayBackward();
 
+echo "\n-------------------SPL DOUBLY LINKED LIST-------------------\n";
 $splBooks= new SplDoublyLinkedList();
 
 $splBooks->push('Laravel Up and Running');
@@ -64,3 +62,24 @@ $splBooks->add(2, 'PHP Pandas');
 for($splBooks->rewind(); $splBooks->valid();$splBooks->next()){
     echo "{$splBooks->current()}\n";
 }
+
+echo "\n-------------------CIRCULAR LINKED LIST-------------------\n";
+$countries= new ItemListCircular();
+
+$countries->insert('Nigeria');
+$countries->insert('Togo');
+$countries->insert('Brazil');
+$countries->insertAtFirst('Angola');
+$countries->insertBefore('Mali', 'Nigeria');
+$countries->insertAfter('Wales', 'Brazil');
+$countries->insert('Canada');
+
+$countries->deleteFirst();
+$countries->deleteLast();
+$countries->delete('Wales');
+
+$countries->getNthNode(4);
+$countries->search('Mali');
+
+$countries->reverse();
+$countries->display();

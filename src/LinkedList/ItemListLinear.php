@@ -52,7 +52,7 @@ class ItemListLinear extends Base
             while($currentNode !== null){
                 if($currentNode->data === $query){
                     $newNode->next= $currentNode;
-                    $previousNode ? $previousNode->next= $newNode: $this->firstNode= $newNode;
+                    $previousNode ? $previousNode->next= $newNode: $this->firstNode->next= $newNode;
                     $this->totalNodes++;
                     break;
                 }
@@ -149,7 +149,7 @@ class ItemListLinear extends Base
             while($currentNode !== null){
                 if($count === $n){
                     echo "\nNth Node Search Result: {$currentNode->data}\n";
-                    return $currentNode;
+                    return false;
                 }
                 $count++;
                 $currentNode= $currentNode->next;
@@ -168,7 +168,7 @@ class ItemListLinear extends Base
         }
     }
 
-    public function displayBackward()
+    public function reverse()
     {
         // make sure list is not empty
         if($this->firstNode !== null){
