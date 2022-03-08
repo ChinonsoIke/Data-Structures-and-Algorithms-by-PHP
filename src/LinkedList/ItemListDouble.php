@@ -119,8 +119,8 @@ class ItemListDouble extends Base
 
         while(!is_null($currentNode)){
             if($count === $n){
-                echo "Search Result: {$currentNode->data}\n";
-                return true;
+                // echo "Search Result: {$currentNode->data}\n";
+                return $currentNode;
             }
             $currentNode= $currentNode->next;
             $count++;
@@ -199,5 +199,17 @@ class ItemListDouble extends Base
             echo "{$currentNode->data}\n";
             $currentNode= $currentNode->prev;
         }
+    }
+
+    public function getSize() : int
+    {
+        $count= 0;
+        $currentNode= $this->firstNode;
+
+        while(!is_null($currentNode)){
+            $count++;
+            $currentNode= $currentNode->next;
+        }
+        return $count;
     }
 }

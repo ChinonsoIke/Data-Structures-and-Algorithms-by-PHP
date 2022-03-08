@@ -24,6 +24,37 @@ class ItemListLinear extends Base
         return true;
     }
 
+    public function insertWithPriority(string $data=null, int $priority=null)
+    {
+        $newNode= new ItemNode($data, $priority);
+        // check if first node is null
+        if($this->firstNode === null){
+            $this->firstNode= &$newNode;
+        }else{
+            // list is not empty
+            $previous= $this->firstNode;
+            $currentNode= $this->firstNode;
+            while($currentNode !== null){
+                if($currentNode->priority < $priority){
+                    if($currentNode === $this->firstNode){
+                        $previous= $this->firstNode;
+                        $this->firstNode= &$newNode;
+                        $newNode->next= $previous;
+                        return;
+                    }else{
+                        $newNode->next= $currentNode;
+                        $previous->next= $newNode;
+                        return;
+                    }
+                }
+                $previous= $currentNode;
+                $currentNode= $currentNode->next;
+            }
+        }
+        $this->totalNodes++;
+        return true;
+    }
+
     public function insertAtFirst(string $data=null)
     {
         $newNode= new ItemNode($data);
@@ -148,8 +179,8 @@ class ItemListLinear extends Base
             $currentNode= $this->firstNode;
             while($currentNode !== null){
                 if($count === $n){
-                    echo "\nNth Node Search Result: {$currentNode->data}\n";
-                    return false;
+                    // echo "\nNth Node Search Result: {$currentNode->data}\n";
+                    return $currentNode;
                 }
                 $count++;
                 $currentNode= $currentNode->next;
@@ -205,5 +236,17 @@ class ItemListLinear extends Base
             }
         }
         return false;
+    }
+
+    public function getSize() : int
+    {
+        $count= 0;
+        $currentNode= $this->firstNode;
+
+        while(!is_null($currentNode)){
+            $count++;
+            $currentNode= $currentNode->next;
+        }
+        return $count;
     }
 }
